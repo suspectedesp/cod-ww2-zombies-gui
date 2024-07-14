@@ -14,11 +14,20 @@ int WINAPI wWinMain(
     gui::LogToFile(logMessage);
     HWND hwnd = FindWindow(NULL, L"Call of Duty®: WWII Multiplayer");
     bool allowwithoutwindow = GetBooleanFromJSON("debug-mode", "false");
-    if (hwnd == NULL) {
-        logMessage = "Cannot find window, open s2_mp64_ship.exe";
-        gui::LogToFile(logMessage);
-        MessageBoxA(NULL, "Cannot find window, open Call of Duty: WWII Multiplayer", "Error", MB_OK | MB_ICONERROR);
-        return 1;
+    if (hwnd == NULL) 
+    {
+        AllocateConsole();
+        std::cout << "Cannot find window, open Call of Duty: WWII Multiplayer" << std::endl;
+        gui::LogToFile("Cannot find window, open s2_mp64_ship.exe");
+
+        while (hwnd == NULL) 
+        {
+            hwnd = FindWindow(NULL, L"Call of Duty®: WWII Multiplayer"); 
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        }
+
+        std::cout << "Window found, proceeding with the program." << std::endl;
+        FreeingConsole();
     }
     DWORD procID;
     GetWindowThreadProcessId(hwnd, &procID);

@@ -63,6 +63,11 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat\memory\console.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -98,6 +103,8 @@
     <ClCompile Include="cheat\memory\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="cheat-menu.rc">
@@ -108,5 +115,8 @@
     <Image Include="icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -11,10 +11,11 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 
-#include "memory/offsets.h"
+#include "gui.h"
 #include "json/json.hpp"
 #include "json/json_manage.h"
+#include "memory/console.hpp"
 #include "memory/engine.h"
-#include "gui.h"
+#include "memory/offsets.h"
 
 #endif
