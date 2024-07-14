@@ -10,8 +10,7 @@ int WINAPI wWinMain(
     PWSTR arguments,
     int commandShow)
 {
-    std::string logMessage = "\n* ------------------------------------ *\nN E W _ R U N";
-    gui::LogToFile(logMessage);
+    gui::LogToFile("\n* ------------------------------------ *\nN E W _ R U N");
     HWND hwnd = FindWindow(NULL, L"Call of Duty®: WWII Multiplayer");
     bool allowwithoutwindow = GetBooleanFromJSON("debug-mode", "false");
     if (hwnd == NULL) 
@@ -26,6 +25,7 @@ int WINAPI wWinMain(
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
 
+        gui::LogToFile("Window found, proceeding with the program.");
         std::cout << "Window found, proceeding with the program." << std::endl;
         FreeingConsole();
     }
@@ -34,15 +34,13 @@ int WINAPI wWinMain(
     HANDLE handle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, procID);
     if (handle == NULL)
     {
-        logMessage = "Cannot obtain process handle";
-        gui::LogToFile(logMessage);
+        gui::LogToFile("Cannot obtain process handle");
         MessageBoxA(NULL, "Cannot obtain process handle", "Error", MB_OK | MB_ICONERROR);
         return 1;
     }
     uintptr_t modulebase = GetModuleBase(L"s2_mp64_ship.exe", procID);
     if (modulebase == 0) {
-        logMessage = "Module base is 0";
-        gui::LogToFile(logMessage);
+        gui::LogToFile("Module base is 0");
         MessageBoxA(NULL, "ModuleBase is 0", "Error", MB_OK | MB_ICONERROR);
     }
     gui::CreateHWindow("COD WWII Zombies: Menu");
@@ -51,8 +49,7 @@ int WINAPI wWinMain(
 
     bool UserNameChangerLoop = GetBooleanFromJSON("UserNameChangerLoop", "true");
     std::string username = GetValueFromJSON("username", "DefaultUsername");
-    logMessage = "Welcome, " + username;
-    gui::LogToFile(logMessage);
+    gui::LogToFile("Welcome, " + username);
     if (UserNameChangerLoop)
     {
         std::thread DisplayUsernameThread(DisplayUsername, handle, modulebase);
